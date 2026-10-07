@@ -7,401 +7,509 @@
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
-
       gtag('config', 'G-H194B9QFZX');
     </script>
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>מגן רשת - בדיקת חשד להונאה ופישינג</title>
-    <link href="https://fonts.googleapis.com/css2?family=Assistant:wght@400;600;700;800&display=swap" rel="stylesheet">
-    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Assistant:wght@400;600;700&family=Secular+One&display=swap" rel="stylesheet">
+
     <style>
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: 'Assistant', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        :root {
+            --ink: #0e2a2f;
+            --ink-soft: #3d5559;
+            --muted: #6b8084;
+            --bg: #eef3f2;
+            --card: #ffffff;
+            --line: #d9e4e2;
+            --brand: #0f766e;
+            --brand-dark: #0b5953;
+            --danger: #c2372b;
+            --danger-bg: #fdeeec;
+            --safe: #1a7f4e;
+            --safe-bg: #e8f6ee;
+            --warn: #b9770e;
+            --radius: 16px;
         }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        html { -webkit-text-size-adjust: 100%; }
 
         body {
-            background-color: #f1f5f9;
-            color: #1e293b;
+            font-family: 'Assistant', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+            background: var(--bg);
+            color: var(--ink);
+            line-height: 1.6;
+            font-size: 1.05rem;
             min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding: 24px 16px;
         }
 
-        /* עמודת מרכז הדף */
-        .app-wrapper {
-            width: 100%;
-            max-width: 600px;
+        /* ---------- Hero ---------- */
+        .hero {
+            background: var(--ink);
+            color: #fff;
+            padding: 44px 20px 96px;
+            text-align: center;
+        }
+
+        .hero-inner { max-width: 640px; margin: 0 auto; }
+
+        .shield {
+            width: 56px;
+            height: 56px;
+            margin: 0 auto 16px;
+            display: block;
+        }
+
+        h1 {
+            font-family: 'Secular One', 'Assistant', sans-serif;
+            font-weight: 400;
+            font-size: clamp(2rem, 6vw, 2.8rem);
+            line-height: 1.15;
+            margin-bottom: 10px;
+        }
+
+        .hero p {
+            color: #b7cdd0;
+            font-size: 1.05rem;
+            max-width: 46ch;
+            margin: 0 auto;
+        }
+
+        /* ---------- Layout ---------- */
+        .wrap {
+            max-width: 640px;
+            margin: -64px auto 0;
+            padding: 0 16px 40px;
             display: flex;
             flex-direction: column;
             gap: 20px;
         }
 
-        /* כותרת עליונה מיתוגית */
-        .brand-header {
-            text-align: center;
-            padding: 10px 0;
+        .card {
+            background: var(--card);
+            border-radius: var(--radius);
+            border: 1px solid var(--line);
+            box-shadow: 0 12px 32px rgba(14, 42, 47, 0.10);
         }
 
-        .brand-logo {
-            display: inline-flex;
+        /* ---------- Checker ---------- */
+        .checker { padding: 20px; }
+
+        .checker label {
+            display: block;
+            font-weight: 700;
+            font-size: 1.1rem;
+            margin-bottom: 10px;
+        }
+
+        textarea {
+            width: 100%;
+            min-height: 120px;
+            resize: vertical;
+            padding: 14px 16px;
+            border: 2px solid var(--line);
+            border-radius: 12px;
+            font: inherit;
+            font-size: 1rem;
+            color: var(--ink);
+            background: #fbfdfc;
+            transition: border-color .15s, box-shadow .15s;
+        }
+
+        textarea::placeholder { color: var(--muted); }
+
+        textarea:focus {
+            outline: none;
+            border-color: var(--brand);
+            box-shadow: 0 0 0 4px rgba(15, 118, 110, 0.15);
+        }
+
+        .actions {
+            display: flex;
+            gap: 10px;
             align-items: center;
-            justify-content: center;
-            width: 52px;
-            height: 52px;
-            background: linear-gradient(135deg, #0ea5e9, #0284c7);
-            color: #ffffff;
-            border-radius: 14px;
-            font-size: 26px;
-            margin-bottom: 12px;
-            box-shadow: 0 4px 12px rgba(2, 132, 199, 0.25);
+            margin-top: 12px;
+            flex-wrap: wrap;
         }
 
-        .brand-title {
-            font-size: 1.8rem;
-            font-weight: 800;
-            color: #0f172a;
-            margin-bottom: 4px;
-            letter-spacing: -0.5px;
+        .btn-check {
+            flex: 1 1 200px;
+            background: var(--brand);
+            color: #fff;
+            border: 0;
+            border-radius: 12px;
+            padding: 14px 20px;
+            font: inherit;
+            font-weight: 700;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: background .15s, transform .1s;
         }
 
-        .brand-subtitle {
-            font-size: 0.95rem;
-            color: #64748b;
+        .btn-check:hover { background: var(--brand-dark); }
+        .btn-check:active { transform: translateY(1px); }
+        .btn-check:disabled { background: #9db8b5; cursor: wait; }
+
+        .btn-clear {
+            background: none;
+            border: 2px solid var(--line);
+            color: var(--ink-soft);
+            border-radius: 12px;
+            padding: 12px 16px;
+            font: inherit;
+            font-weight: 600;
+            cursor: pointer;
         }
 
-        /* כרטיסיית הצ'אט הראשית */
-        .chat-container {
-            background: #ffffff;
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+        .btn-clear:hover { border-color: var(--muted); }
+
+        .examples {
+            margin-top: 14px;
+            font-size: 0.9rem;
+            color: var(--muted);
+        }
+
+        .examples button {
+            font: inherit;
+            font-size: 0.9rem;
+            background: #f1f6f5;
+            border: 1px solid var(--line);
+            color: var(--ink-soft);
+            border-radius: 999px;
+            padding: 4px 12px;
+            margin: 6px 0 0 6px;
+            cursor: pointer;
+        }
+
+        .examples button:hover { border-color: var(--brand); color: var(--brand-dark); }
+
+        /* ---------- Results ---------- */
+        .results {
             display: flex;
             flex-direction: column;
-            height: 500px;
-            overflow: hidden;
-            border: 1px solid #e2e8f0;
+            gap: 14px;
+            padding: 0 20px 20px;
         }
 
-        .chat-header {
-            background: #0f172a;
-            color: white;
-            padding: 14px 20px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
+        .results:empty { display: none; }
+
+        .sent {
+            background: #f1f6f5;
+            border-radius: 12px;
+            padding: 12px 14px;
+            color: var(--ink-soft);
+            font-size: 0.95rem;
+            white-space: pre-wrap;
+            word-break: break-word;
+            max-height: 110px;
+            overflow: auto;
         }
 
-        .chat-header-info {
-            display: flex;
-            align-items: center;
-            gap: 10px;
+        .sent small {
+            display: block;
+            font-weight: 700;
+            color: var(--muted);
+            margin-bottom: 2px;
         }
 
-        .status-dot {
-            width: 9px;
-            height: 9px;
-            background-color: #22c55e;
-            border-radius: 50%;
-            box-shadow: 0 0 8px #22c55e;
+        .verdict {
+            border-radius: 12px;
+            padding: 16px;
+            border: 2px solid var(--line);
+            background: #fbfdfc;
         }
 
-        .chat-header h2 {
-            font-size: 1rem;
+        .verdict.danger { background: var(--danger-bg); border-color: #f1b9b3; }
+        .verdict.safe { background: var(--safe-bg); border-color: #a9dcc0; }
+
+        .verdict-title {
+            font-weight: 700;
+            font-size: 1.15rem;
+            margin-bottom: 6px;
+        }
+
+        .verdict.danger .verdict-title { color: var(--danger); }
+        .verdict.safe .verdict-title { color: var(--safe); }
+
+        .verdict-body {
+            white-space: pre-wrap;
+            word-break: break-word;
+            color: var(--ink);
+        }
+
+        .verdict-note {
+            margin-top: 10px;
             font-weight: 700;
         }
 
-        .chat-messages {
-            flex: 1;
-            padding: 20px;
-            overflow-y: auto;
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-            background-color: #f8fafc;
-        }
+        .verdict.loading { color: var(--muted); display: flex; align-items: center; gap: 10px; }
 
-        .message {
-            max-width: 85%;
-            padding: 12px 16px;
-            border-radius: 16px;
-            font-size: 0.95rem;
-            line-height: 1.5;
-            word-break: break-word;
-            white-space: pre-wrap;
-        }
-
-        .user-message {
-            align-self: flex-start;
-            background: #0284c7;
-            color: white;
-            border-bottom-left-radius: 4px;
-        }
-
-        .bot-message {
-            align-self: flex-end;
-            background: #ffffff;
-            color: #334155;
-            border-bottom-right-radius: 4px;
-            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
-            border: 1px solid #e2e8f0;
-        }
-
-        .alert-box {
-            margin-top: 8px;
-            padding: 10px 14px;
-            border-radius: 10px;
-            font-weight: 600;
-            font-size: 0.9rem;
-        }
-
-        .alert-danger {
-            background: #fef2f2;
-            color: #991b1b;
-            border: 1px solid #fecaca;
-        }
-
-        .alert-safe {
-            background: #f0fdf4;
-            color: #166534;
-            border: 1px solid #bbf7d0;
-        }
-
-        .chat-input-area {
-            display: flex;
-            padding: 12px 16px;
-            background: #ffffff;
-            gap: 10px;
-            align-items: center;
-            border-top: 1px solid #e2e8f0;
-        }
-
-        .chat-input {
-            flex: 1;
-            padding: 12px 18px;
-            border: 1.5px solid #cbd5e1;
-            border-radius: 9999px;
-            outline: none;
-            font-size: 0.95rem;
-            transition: border-color 0.2s;
-        }
-
-        .chat-input:focus {
-            border-color: #0284c7;
-        }
-
-        .btn-send {
-            background: #0284c7;
-            color: white;
-            border: none;
+        .spinner {
+            width: 20px; height: 20px;
+            border: 3px solid var(--line);
+            border-top-color: var(--brand);
             border-radius: 50%;
-            width: 44px;
-            height: 44px;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 16px;
-            transition: background-color 0.2s;
+            animation: spin .8s linear infinite;
+            flex: none;
         }
 
-        .btn-send:hover {
-            background: #0369a1;
-        }
+        @keyframes spin { to { transform: rotate(360deg); } }
 
-        .loading {
-            font-size: 0.85rem;
-            color: #94a3b8;
-            font-style: italic;
-        }
+        /* ---------- Threats ---------- */
+        .threats { padding: 22px 20px; }
 
-        /* סקשן התרעות עדכניות */
-        .threat-feed {
-            background: #ffffff;
-            border-radius: 18px;
-            padding: 20px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
-            border: 1px solid #e2e8f0;
-        }
-
-        .threat-header {
+        .threats-head {
             display: flex;
             align-items: center;
             justify-content: space-between;
             margin-bottom: 14px;
-            padding-bottom: 10px;
-            border-bottom: 1px solid #f1f5f9;
         }
 
-        .threat-title {
-            font-size: 1rem;
+        .threats h2 {
+            font-family: 'Secular One', 'Assistant', sans-serif;
+            font-weight: 400;
+            font-size: 1.3rem;
+        }
+
+        .badge {
+            background: var(--danger-bg);
+            color: var(--danger);
+            font-size: 0.8rem;
             font-weight: 700;
-            color: #0f172a;
+            padding: 3px 10px;
+            border-radius: 999px;
+        }
+
+        .threat {
             display: flex;
-            align-items: center;
-            gap: 6px;
+            gap: 12px;
+            padding: 14px 0;
+            border-top: 1px solid var(--line);
         }
 
-        .live-badge {
-            background-color: #fee2e2;
-            color: #b91c1c;
-            font-size: 0.75rem;
-            padding: 4px 10px;
-            border-radius: 9999px;
-            font-weight: 700;
+        .threat:first-of-type { border-top: 0; padding-top: 0; }
+
+        .threat-icon {
+            flex: none;
+            width: 40px; height: 40px;
+            border-radius: 10px;
+            display: grid;
+            place-items: center;
+            font-size: 1.2rem;
+            background: var(--danger-bg);
         }
 
-        .threat-list {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
+        .threat.warn .threat-icon { background: #fbf0dc; }
+        .threat.info .threat-icon { background: #e3eefb; }
 
-        .threat-item {
-            background: #f8fafc;
-            border-right: 4px solid #ef4444;
-            border-radius: 8px;
-            padding: 12px 14px;
-            font-size: 0.85rem;
-            line-height: 1.4;
-        }
+        .threat strong { display: block; font-size: 1rem; margin-bottom: 2px; }
+        .threat p { color: var(--ink-soft); font-size: 0.95rem; }
 
-        .threat-item strong {
-            color: #0f172a;
-            display: block;
-            margin-bottom: 4px;
-            font-size: 0.9rem;
+        /* ---------- Tips ---------- */
+        .tips { padding: 22px 20px; }
+        .tips h2 {
+            font-family: 'Secular One', 'Assistant', sans-serif;
+            font-weight: 400;
+            font-size: 1.3rem;
+            margin-bottom: 10px;
         }
+        .tips ul { padding-inline-start: 1.2em; color: var(--ink-soft); }
+        .tips li { margin-bottom: 6px; }
 
-        .threat-item p {
-            color: #64748b;
-            margin: 0;
-        }
-
-        /* כפתור שיתוף בוואטסאפ */
-        .whatsapp-share-btn {
+        /* ---------- Share ---------- */
+        .share {
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 8px;
-            background-color: #22c55e;
-            color: white;
+            background: #1fa855;
+            color: #fff;
             text-decoration: none;
             font-weight: 700;
-            font-size: 0.95rem;
-            padding: 12px;
+            padding: 14px;
             border-radius: 12px;
-            margin-top: 14px;
-            transition: background-color 0.2s;
+            transition: background .15s;
         }
 
-        .whatsapp-share-btn:hover {
-            background-color: #16a34a;
-        }
+        .share:hover { background: #178a45; }
 
-        /* הערת הבהרה משפטית */
         .disclaimer {
             text-align: center;
-            font-size: 0.75rem;
-            color: #94a3b8;
-            padding: 8px 0;
-            line-height: 1.4;
+            font-size: 0.85rem;
+            color: var(--muted);
+            padding: 4px 8px;
         }
+
+        :focus-visible { outline: 3px solid var(--brand); outline-offset: 2px; }
+
+        @media (prefers-reduced-motion: reduce) {
+            .spinner { animation-duration: 2s; }
+            * { transition: none !important; }
+        }
+
+        @media (max-width: 480px) {
+            .hero { padding-top: 32px; }
+            .btn-clear { flex: 1 1 100%; }
+        }
+
+        /* ---------- Game / alerts / bot ---------- */
+        .game, .bot { padding: 22px 20px; }
+        .game h2, .bot h2 {
+            font-family: 'Secular One', 'Assistant', sans-serif;
+            font-weight: 400;
+            font-size: 1.3rem;
+            margin-bottom: 4px;
+        }
+        .game .sub { color: var(--muted); font-size: 0.95rem; }
+        .bot p { color: var(--ink-soft); margin: 6px 0 12px; }
+        .game-count { margin-top: 14px; font-size: 0.9rem; font-weight: 700; color: var(--muted); }
+        .game-msg {
+            background: #f1f6f5;
+            border-radius: 12px;
+            padding: 14px 16px;
+            margin: 8px 0 12px;
+            unicode-bidi: plaintext;
+            white-space: pre-wrap;
+            word-break: break-word;
+        }
+        .game-btns { display: flex; gap: 10px; }
+        .game-btns button {
+            flex: 1;
+            font: inherit;
+            font-weight: 700;
+            font-size: 1.05rem;
+            padding: 13px;
+            border-radius: 12px;
+            border: 2px solid var(--line);
+            background: #fff;
+            color: var(--ink);
+            cursor: pointer;
+        }
+        .game-btns button:hover:not(:disabled) { border-color: var(--brand); }
+        .game-btns button:disabled { cursor: default; opacity: 0.55; }
+        .game-fb { margin-top: 12px; padding: 12px 14px; border-radius: 12px; }
+        .game-fb.ok { background: var(--safe-bg); }
+        .game-fb.no { background: var(--danger-bg); }
+        .game-fb strong { display: block; margin-bottom: 2px; }
+        .game .btn-check, .bot .btn-check { width: 100%; margin-top: 12px; }
+        .bot .btn-check { margin-top: 0; }
+        .game-score { font-size: 1.2rem; font-weight: 700; margin: 10px 0; }
+        .alert-src { font-size: 0.85rem; color: var(--muted); margin-top: 4px; }
+        .alert-src a { color: var(--brand-dark); }
+        .alerts-note { font-size: 0.9rem; color: var(--muted); margin-top: 12px; }
     </style>
 </head>
 <body>
 
-<div class="app-wrapper">
-    <!-- כותרת ראשית -->
-    <header class="brand-header">
-        <div class="brand-logo">🛡️</div>
-        <h1 class="brand-title">מגן רשת</h1>
-        <p class="brand-subtitle">בדיקה חכמה ומהירה להודעות SMS, מיילים וקישורים חשודים</p>
-    </header>
+<header class="hero">
+    <div class="hero-inner">
+        <svg class="shield" viewBox="0 0 64 64" aria-hidden="true">
+            <path d="M32 4 8 13v17c0 15 10 26 24 30 14-4 24-15 24-30V13L32 4Z" fill="#14b8a6"/>
+            <path d="m21 32 8 8 15-16" fill="none" stroke="#0e2a2f" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <h1>מגן רשת</h1>
+        <p>קיבלתם הודעה או קישור שנראים חשודים? הדביקו אותם כאן ונבדוק אם מדובר בהונאה.</p>
+    </div>
+</header>
 
-    <!-- חלונית הצ'אט -->
-    <main class="chat-container">
-        <div class="chat-header">
-            <div class="chat-header-info">
-                <span class="status-dot"></span>
-                <h2>עוזר אבטחה פעיל</h2>
-            </div>
-            <span style="font-size: 0.8rem; color: #94a3b8;">גרסה 1.0</span>
-        </div>
+<main class="wrap">
 
-        <div class="chat-messages" id="chatMessages">
-            <div class="message bot-message">
-                שלום! 👋<br>
-                קיבלת הודעה חשודה בוואטסאפ או ב-SMS? קישור לא ברור?<br>
-                הדביקי את הטקסט או הקישור כאן למטה ואבדוק עבורך אם מדובר בעוקץ.
-            </div>
-        </div>
+    <section class="card" aria-label="בדיקת הודעה">
+        <div class="checker">
+            <label for="userInput">מה לבדוק?</label>
+            <textarea id="userInput" placeholder="הדביקו כאן הודעת SMS, וואטסאפ, מייל או קישור…"></textarea>
 
-        <div class="chat-input-area">
-            <input type="text" id="userInput" class="chat-input" placeholder="הדביקי כאן הודעה, טקסט או קישור לבדיקה..." onkeypress="handleKeyPress(event)">
-            <button class="btn-send" onclick="sendMessage()" aria-label="שלח">➤</button>
-        </div>
-    </main>
-
-    <!-- התרעות רשת חמות -->
-    <section class="threat-feed">
-        <div class="threat-header">
-            <span class="threat-title">🚨 התרעות עוקץ פעילות</span>
-            <span class="live-badge">● מעודכן</span>
-        </div>
-
-        <div class="threat-list">
-            <div class="threat-item">
-                <strong>התחזות לדואר ישראל / חבילות</strong>
-                <p>הודעות SMS על "חבילה שממתינה לשחרור מכס בסך 11.50 ש״ח". הקישורים גונבים פרטי כרטיס אשראי.</p>
+            <div class="actions">
+                <button class="btn-check" id="checkBtn" type="button">בדקו עכשיו</button>
+                <button class="btn-clear" id="clearBtn" type="button">נקה</button>
             </div>
 
-            <div class="threat-item" style="border-right-color: #f59e0b;">
-                <strong>התחזות לבנקים: "חשבונך נחסם"</strong>
-                <p>סמסים המלחיצים להיכנס לקישור כדי לחדש גישה לחשבון הבנק, במטרה לגנוב סיסמאות כניסה.</p>
-            </div>
-
-            <div class="threat-item" style="border-right-color: #3b82f6;">
-                <strong>הצעות עבודה קלות בטלגרם</strong>
-                <p>"תשלום של מאות שקלים ליום תמורת לייקים" – תרמית פירמידה שנועדה להוציא ממך כספים.</p>
+            <div class="examples">
+                לא בטוחים? נסו דוגמה:
+                <button type="button" data-example="דואר ישראל: חבילה ממתינה לך. יש לשלם 11.50 ש״ח דמי מכס בקישור: http://israelpost-il.top/pay">הודעת חבילה</button>
+                <button type="button" data-example="בנק: חשבונך נחסם. היכנס מיד לקישור לחידוש הגישה: http://bank-secure-login.xyz">חשבון בנק נחסם</button>
             </div>
         </div>
 
-        <a class="whatsapp-share-btn" 
-           href="https://api.whatsapp.com/send?text=היי,%20מסתובבות%20המון%20הודעות%20עוקץ%20וסמסים%20מזויפים%20לאחרונה.%20לפני%20שאתם%20לוחצים%20על%20קישור%20חשוד,%20אפשר%20לבדוק%20אותו%20בחינם%20באתר%20'מגן%20רשת':%20https://magen-reshet.onrender.com/" 
-           target="_blank">
-            📲 שתפו בוואטסאפ להזהרת המשפחה והחברים
-        </a>
+        <div class="results" id="results" aria-live="polite"></div>
     </section>
 
-    <!-- שורת הבהרה -->
-    <footer class="disclaimer">
-        ⚠️ הבהרה: המערכת מספקת הערכת סיכונים טכנולוגית ראשונית בלבד ואינה מהווה ייעוץ אבטחה מוחלט. השימוש באחריות המשתמש.
-    </footer>
-</div>
+    <section class="card game" aria-label="משחק">
+        <h2>עוקץ או אמיתי?</h2>
+        <p class="sub">שש הודעות לדוגמה. נסו לזהות איזו מהן הונאה.</p>
+        <div id="gameBox"></div>
+    </section>
+
+    <section class="card threats" aria-label="אזהרות רשמיות">
+        <div class="threats-head">
+            <h2>אזהרות רשמיות</h2>
+        </div>
+        <div id="alertList"></div>
+        <p class="alerts-note">האזהרות מבוססות על פרסומים של גופים רשמיים. לדיווח על הונאה חייגו 119 (מערך הסייבר הלאומי).</p>
+    </section>
+
+    <section class="card bot" aria-label="בוט וואטסאפ">
+        <h2>רוצים לבדוק ישירות בוואטסאפ?</h2>
+        <p>אנחנו בודקים אם יש עניין בבוט שאליו אפשר להעביר הודעה חשודה ולקבל תשובה. לחיצה על הכפתור רק נספרת, ואנחנו לא אוספים פרטים.</p>
+        <button class="btn-check bot-btn" id="botBtn" type="button">כן, אני מעוניין</button>
+    </section>
+
+    <section class="card tips" aria-label="טיפים">
+        <h2>איך מזהים עוקץ</h2>
+        <ul>
+            <li>הודעה שדוחקת בכם לפעול מיד, "היום" או "תוך שעה".</li>
+            <li>קישור שהכתובת שלו לא מוכרת, גם אם השם נראה כמו שם של חברה אמיתית.</li>
+            <li>בקשה לסיסמה, קוד אימות או פרטי אשראי. גופים אמיתיים לא מבקשים אותם בהודעה.</li>
+        </ul>
+    </section>
+
+    <a class="share"
+       href="https://api.whatsapp.com/send?text=היי,%20מסתובבות%20המון%20הודעות%20עוקץ%20וסמסים%20מזויפים%20לאחרונה.%20לפני%20שאתם%20לוחצים%20על%20קישור%20חשוד,%20אפשר%20לבדוק%20אותו%20בחינם%20באתר%20'מגן%20רשת':%20https://magen-reshet.onrender.com/"
+       target="_blank" rel="noopener">
+        📲 שתפו בוואטסאפ והזהירו משפחה וחברים
+    </a>
+
+    <p class="disclaimer">
+        המערכת מספקת הערכת סיכונים ראשונית בלבד ואינה מהווה ייעוץ אבטחה מוחלט. השימוש באחריות המשתמש.
+    </p>
+</main>
 
 <script>
+    const input = document.getElementById('userInput');
+    const results = document.getElementById('results');
+    const checkBtn = document.getElementById('checkBtn');
+
+    function el(tag, className, text) {
+        const node = document.createElement(tag);
+        if (className) node.className = className;
+        if (text !== undefined) node.textContent = text;
+        return node;
+    }
+
     async function sendMessage() {
-        const input = document.getElementById('userInput');
         const text = input.value.trim();
-        if (!text) return;
+        if (!text) {
+            input.focus();
+            return;
+        }
 
-        addMessage(text, 'user-message');
-        input.value = '';
+        checkBtn.disabled = true;
+        results.replaceChildren();
 
-        const chatMessages = document.getElementById('chatMessages');
-        const loadingId = 'loading-' + Date.now();
-        const loadingDiv = document.createElement('div');
-        loadingDiv.className = 'message bot-message loading';
-        loadingDiv.id = loadingId;
-        loadingDiv.innerText = 'בודק את ההודעה מול מאגרי אבטחה...';
-        chatMessages.appendChild(loadingDiv);
-        chatMessages.scrollTop = chatMessages.scrollHeight;
+        const sent = el('div', 'sent');
+        sent.appendChild(el('small', '', 'ההודעה שנבדקה'));
+        sent.appendChild(document.createTextNode(text));
+        results.appendChild(sent);
+
+        const loading = el('div', 'verdict loading');
+        loading.appendChild(el('span', 'spinner'));
+        loading.appendChild(el('span', '', 'בודקים את ההודעה מול מאגרי אבטחה…'));
+        results.appendChild(loading);
 
         try {
             const response = await fetch('/analyze', {
@@ -410,42 +518,174 @@
                 body: JSON.stringify({ message: text })
             });
             const data = await response.json();
-            
-            const loader = document.getElementById(loadingId);
-            if (loader) loader.remove();
 
-            let responseHtml = data.reply || 'לא התקבלה תשובה תקינה מהשרת.';
-            if (data.alert) {
-                const alertClass = data.alert_type === 'danger' ? 'alert-danger' : 'alert-safe';
-                responseHtml += `<div class="alert-box ${alertClass}">${data.alert}</div>`;
-            }
+            const verdict = el('div', 'verdict');
+            if (data.alert_type === 'danger') verdict.classList.add('danger');
+            else if (data.alert) verdict.classList.add('safe');
 
-            addMessage(responseHtml, 'bot-message', true);
+            if (data.alert_type === 'danger') verdict.appendChild(el('div', 'verdict-title', '⚠️ זה נראה כמו עוקץ'));
+            else if (data.alert) verdict.appendChild(el('div', 'verdict-title', '✅ לא זוהה סימן מובהק להונאה'));
+
+            verdict.appendChild(el('div', 'verdict-body', data.reply || 'לא התקבלה תשובה תקינה מהשרת.'));
+            if (data.alert) verdict.appendChild(el('div', 'verdict-note', data.alert));
+
+            loading.replaceWith(verdict);
         } catch (error) {
-            const loader = document.getElementById(loadingId);
-            if (loader) loader.remove();
-            addMessage('אירעה שגיאה בבדיקה, אנא נסי שוב מאוחר יותר.', 'bot-message');
+            const err = el('div', 'verdict danger');
+            err.appendChild(el('div', 'verdict-title', 'הבדיקה לא הצליחה'));
+            err.appendChild(el('div', 'verdict-body', 'אירעה שגיאה בחיבור לשרת. נסו שוב בעוד רגע.'));
+            loading.replaceWith(err);
+        } finally {
+            checkBtn.disabled = false;
+            results.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
         }
     }
 
-    function addMessage(content, className, isHtml = false) {
-        const chatMessages = document.getElementById('chatMessages');
-        const msgDiv = document.createElement('div');
-        msgDiv.className = `message ${className}`;
-        if (isHtml) {
-            msgDiv.innerHTML = content;
-        } else {
-            msgDiv.innerText = content;
+    checkBtn.addEventListener('click', sendMessage);
+
+    document.getElementById('clearBtn').addEventListener('click', () => {
+        input.value = '';
+        results.replaceChildren();
+        input.focus();
+    });
+
+    document.querySelectorAll('[data-example]').forEach(btn => {
+        btn.addEventListener('click', () => {
+            input.value = btn.dataset.example;
+            input.focus();
+        });
+    });
+
+    // Ctrl/Cmd + Enter sends; plain Enter adds a new line (messages can be long)
+    input.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' && (e.ctrlKey || e.metaKey)) sendMessage();
+    });
+
+    // ---------- Analytics (events only, never message content) ----------
+    function track(name) { try { gtag('event', name); } catch (e) {} }
+
+    // ---------- Official alerts: edit this list to add or remove alerts ----------
+    // date: optional (e.g. '2026-10-05'). Add it only when the source's date is known.
+    const ALERTS = [
+        {
+            icon: '📦', type: '',
+            title: 'אתר מעקב משלוחים מזויף בשם דואר ישראל',
+            text: 'מערך הסייבר הלאומי מזהיר מאתר מזויף שמציע מעקב אחר משלוח. מה שמקלידים בו מועבר לתוקפים בזמן אמת. מעקב משלוחים עושים רק באתר או באפליקציה הרשמיים.',
+            source: 'מערך הסייבר הלאומי, דרך i24NEWS', date: '',
+            url: 'https://www.i24news.tv/he/news/science-and-technology/artc-d6a2573f'
+        },
+        {
+            icon: '🚔', type: 'warn',
+            title: 'הודעות קנס תעבורה מזויפות',
+            text: 'המשטרה מתריעה מפני הודעות SMS מזויפות בשם המשטרה ומרכז הקנסות, שדורשות תשלום דרך קישור. לא נכנסים לקישור, לא מוסרים פרטים, ומוחקים את ההודעה.',
+            source: 'משטרת ישראל, דרך JDN', date: '',
+            url: 'https://www.jdn.co.il/news/2701519/'
+        },
+        {
+            icon: '📱', type: 'info',
+            title: 'הודעות מזויפות בשם פיקוד העורף',
+            text: 'בזמן אזעקות הופצו הודעות בשם פיקוד העורף שקראו להוריד אפליקציה דרך קישור זדוני. פיקוד העורף אינו מפיץ קישורים להורדת אפליקציות ב-SMS.',
+            source: 'כאן חדשות, בהסתמך על מערך הסייבר הלאומי', date: '',
+            url: 'https://www.kan.org.il/content/kan-news/local/1015209/'
         }
-        chatMessages.appendChild(msgDiv);
-        chatMessages.scrollTop = chatMessages.scrollHeight;
+    ];
+
+    (function renderAlerts() {
+        const box = document.getElementById('alertList');
+        ALERTS.forEach(a => {
+            const row = el('div', 'threat ' + a.type);
+            row.appendChild(el('div', 'threat-icon', a.icon));
+            const body = el('div');
+            body.appendChild(el('strong', '', a.title));
+            body.appendChild(el('p', '', a.text));
+            const src = el('div', 'alert-src');
+            src.appendChild(document.createTextNode('מקור: '));
+            const link = el('a', '', a.source);
+            link.href = a.url; link.target = '_blank'; link.rel = 'noopener';
+            link.addEventListener('click', () => track('alert_source_click'));
+            src.appendChild(link);
+            if (a.date) src.appendChild(document.createTextNode(' · ' + a.date));
+            body.appendChild(src);
+            row.appendChild(body);
+            box.appendChild(row);
+        });
+    })();
+
+    // ---------- Game: scam or real ----------
+    const SITE_URL = 'https://magen-reshet.onrender.com/';
+    const GAME = [
+        { t: 'דואר ישראל: חבילה מס\' IL48213 ממתינה לך. נותרו 24 שעות לתשלום 11.50 ש״ח בקישור: israelpost-il.top/pay', scam: true,
+          why: 'כתובת עם סיומת מוזרה (top), לחץ של זמן ובקשה לתשלום קטן. אלה שלושת הסימנים הקלאסיים.' },
+        { t: 'הקוד החד-פעמי שלך לכניסה לחשבון הוא 482913. אל תמסור אותו לאיש, גם לא לנציג הבנק.', scam: false,
+          why: 'הודעה כזו אמיתית כשאתם הרגע ניסיתם להיכנס. אם קיבלתם אותה בלי שביקשתם, מישהו מנסה להיכנס לחשבון שלכם. בכל מקרה לא מוסרים את הקוד.' },
+        { t: 'חשבונך נחסם! היכנס תוך שעה להסרת החסימה: bank-secure-login.xyz', scam: true,
+          why: 'בנק לא נותן שעה להיכנס לקישור, והכתובת אינה של הבנק. שימו לב לסיומת xyz.' },
+        { t: 'תזכורת: התור שלך לרופא משפחה מחר ב-09:30. לביטול השיבו 2.', scam: false,
+          why: 'אין קישור, אין בקשה לכסף ואין פרטים אישיים. הודעת תזכורת רגילה. אם יש ספק, בדקו באפליקציה של הקופה.' },
+        { t: 'נרשם בשמך דו״ח תנועה. לתשלום ולמניעת ריבית היכנס: fines-gov-il.top', scam: true,
+          why: 'כתובת ממשלתית אמיתית מסתיימת ב-gov.il. כאן הסיומת top, והמטרה היא לגרום לכם להיכנס ולהזין אשראי.' },
+        { t: 'היי, זה אני, החלפתי מספר. תוכל להעביר לי 800 ש״ח בביט? אחזיר מחר', scam: true,
+          why: 'אין קישור, אבל זו הונאה מוכרת. לפני שמעבירים כסף מתקשרים למספר הישן או שואלים שאלה שרק האדם האמיתי יודע.' }
+    ];
+
+    let gi = 0, gscore = 0;
+    const gbox = document.getElementById('gameBox');
+
+    function renderGame() {
+        gbox.replaceChildren();
+        if (gi >= GAME.length) return renderGameEnd();
+        const q = GAME[gi];
+        gbox.appendChild(el('div', 'game-count', 'הודעה ' + (gi + 1) + ' מתוך ' + GAME.length));
+        gbox.appendChild(el('div', 'game-msg', q.t));
+
+        const btns = el('div', 'game-btns');
+        const bScam = el('button', '', '🚫 עוקץ');
+        const bReal = el('button', '', '✅ אמיתי');
+        btns.append(bScam, bReal);
+        gbox.appendChild(btns);
+
+        function answer(saidScam) {
+            bScam.disabled = bReal.disabled = true;
+            const ok = saidScam === q.scam;
+            if (ok) gscore++;
+            const fb = el('div', 'game-fb ' + (ok ? 'ok' : 'no'));
+            fb.appendChild(el('strong', '', (ok ? 'נכון. ' : 'לא בדיוק. ') + (q.scam ? 'זה עוקץ.' : 'זו הודעה אמיתית.')));
+            fb.appendChild(document.createTextNode(q.why));
+            gbox.appendChild(fb);
+            const next = el('button', 'btn-check', gi + 1 < GAME.length ? 'להודעה הבאה' : 'לתוצאה');
+            next.type = 'button';
+            next.addEventListener('click', () => { gi++; renderGame(); });
+            gbox.appendChild(next);
+            next.focus();
+        }
+        bScam.addEventListener('click', () => answer(true));
+        bReal.addEventListener('click', () => answer(false));
     }
 
-    function handleKeyPress(event) {
-        if (event.key === 'Enter') {
-            sendMessage();
-        }
+    function renderGameEnd() {
+        track('game_complete');
+        gbox.appendChild(el('div', 'game-score', 'ענית נכון על ' + gscore + ' מתוך ' + GAME.length));
+        const txt = 'עניתי נכון על ' + gscore + ' מתוך ' + GAME.length + ' במשחק "עוקץ או אמיתי?" של מגן רשת. נסו גם: ' + SITE_URL;
+        const share = el('a', 'share', '📲 שתפו את התוצאה בוואטסאפ');
+        share.href = 'https://api.whatsapp.com/send?text=' + encodeURIComponent(txt);
+        share.target = '_blank'; share.rel = 'noopener';
+        share.addEventListener('click', () => track('game_share_click'));
+        gbox.appendChild(share);
+        const again = el('button', 'btn-check', 'שחקו שוב');
+        again.type = 'button';
+        again.addEventListener('click', () => { gi = 0; gscore = 0; renderGame(); });
+        gbox.appendChild(again);
     }
+    renderGame();
+
+    // ---------- Bot interest + other events ----------
+    document.getElementById('botBtn').addEventListener('click', (e) => {
+        track('whatsapp_bot_interest');
+        e.target.textContent = 'תודה, ספרנו את ההתעניינות שלך';
+        e.target.disabled = true;
+    });
+    document.querySelector('.wrap > a.share').addEventListener('click', () => track('site_share_click'));
+    document.getElementById('checkBtn').addEventListener('click', () => track('check_submit'));
 </script>
 
 </body>
