@@ -33,6 +33,76 @@
         .btn-send { background: #075e54; color: white; border: none; border-radius: 50%; width: 44px; height: 44px; cursor: pointer; display: flex; justify-content: center; align-items: center; font-size: 1.1rem; }
         .btn-send:hover { background: #128c7e; }
         .loading { font-size: 0.85rem; color: #666; font-style: italic; }
+        /* סגנון לסקשן התרעות חמות */
+.threat-feed {
+    margin-top: 20px;
+    background: #ffffff;
+    border-radius: 12px;
+    padding: 16px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+    border: 1px solid #e2e8f0;
+}
+.threat-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 12px;
+    border-bottom: 1px solid #edf2f7;
+    padding-bottom: 8px;
+}
+.threat-title {
+    font-size: 1.05rem;
+    font-weight: bold;
+    color: #1a202c;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+.live-badge {
+    background-color: #fee2e2;
+    color: #dc2626;
+    font-size: 0.75rem;
+    padding: 2px 8px;
+    border-radius: 9999px;
+    font-weight: bold;
+    animation: pulse 2s infinite;
+}
+@keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
+}
+.threat-item {
+    background: #f8fafc;
+    border-right: 4px solid #ef4444;
+    border-radius: 6px;
+    padding: 10px 12px;
+    margin-bottom: 8px;
+    font-size: 0.85rem;
+}
+.threat-item strong {
+    color: #b91c1c;
+    display: block;
+    margin-bottom: 3px;
+}
+.whatsapp-share-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    width: 100%;
+    background-color: #25D366;
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 0.9rem;
+    padding: 10px;
+    border-radius: 8px;
+    margin-top: 12px;
+    transition: background-color 0.2s;
+}
+.whatsapp-share-btn:hover {
+    background-color: #1ebe5d;
+}
     </style>
 </head>
 <body>
@@ -51,6 +121,35 @@
         <input type="text" id="userInput" class="chat-input" placeholder="הדביקי כאן את ההודעה או הקישור..." onkeypress="handleKeyPress(event)">
         <button class="btn-send" onclick="sendMessage()">➤</button>
     </div>
+</div>
+    <!-- סקשן התרעות קהילתיות בזמן אמת -->
+<div class="threat-feed">
+    <div class="threat-header">
+        <span class="threat-title">🚨 התרעות עוקץ חמות ברשת</span>
+        <span class="live-badge">● עדכני להיום</span>
+    </div>
+    
+    <div class="threat-item">
+        <strong>התחזות לדואר ישראל / חבילות בדואר</strong>
+        הודעות SMS על "חבילה מעוכבת הדורשת תשלום מכס של 11.50 ש״ח". הקישורים מובילים לגניבת פרטי אשראי.
+    </div>
+
+    <div class="threat-item" style="border-right-color: #f59e0b;">
+        <strong>הודעות "חשבון הבנק שלך הוקפא"</strong>
+        סמסים מבהילים עם קישורים מזויפים שמתחזים לאתרי כניסה של בנק הפועלים ולאומי.
+    </div>
+
+    <div class="threat-item" style="border-right-color: #3b82f6;">
+        <strong>הצעות עבודה מפתות בטלגרם / וואטסאפ</strong>
+        "הרווח 500 ש״ח ביום בלחיצה על לייקים ביוטיוב" – מטרתו משיכת כספים בתרמית פירמידה.
+    </div>
+
+    <!-- כפתור שיתוף ישיר לוואטסאפ -->
+    <a class="whatsapp-share-btn" 
+       href="https://api.whatsapp.com/send?text=היי,%20מסתובבות%20המון%20הודעות%20עוקץ%20וסמסים%20מזויפים%20לאחרונה.%20לפני%20שאתם%20לוחצים%20על%20קישור%20חשוד,%20אפשר%20לבדוק%20אותו%20בחינם%20באתר%20'מגן%20רשת':%20https://magen-reshet.onrender.com/" 
+       target="_blank">
+        📲 שתפו בוואטסאפ להזהרת חברים ומשפחה
+    </a>
 </div>
 
 <script>
