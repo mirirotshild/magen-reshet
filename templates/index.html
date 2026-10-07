@@ -1,155 +1,388 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="he" dir="rtl">
 <head>
     <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-H194B9QFZX"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-H194B9QFZX"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
 
-  gtag('config', 'G-H194B9QFZX');
-</script>
+      gtag('config', 'G-H194B9QFZX');
+    </script>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>מגן רשת - בדיקת חשד להונאה ופישינג</title>
+    <link href="https://fonts.googleapis.com/css2?family=Assistant:wght@400;600;700;800&display=swap" rel="stylesheet">
+    
     <style>
-        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
-        body { background: #f0f2f5; display: flex; justify-content: center; align-items: center; height: 100vh; }
-        .chat-container { width: 100%; max-width: 500px; height: 90vh; background: #fff; border-radius: 16px; box-shadow: 0 4px 20px rgba(0,0,0,0.1); display: flex; flex-direction: column; overflow: hidden; }
-        .chat-header { background: #075e54; color: white; padding: 16px; text-align: center; }
-        .chat-header h1 { font-size: 1.2rem; font-weight: 600; }
-        .chat-header p { font-size: 0.85rem; opacity: 0.85; margin-top: 4px; }
-        .chat-messages { flex: 1; padding: 16px; overflow-y: auto; display: flex; flex-direction: column; gap: 12px; background: #e5ddd5; }
-        .message { max-width: 85%; padding: 10px 14px; border-radius: 12px; font-size: 0.95rem; line-height: 1.5; word-break: break-word; white-space: pre-wrap; }
-        .user-message { align-self: flex-start; background: #d9fdd3; border-bottom-left-radius: 2px; }
-        .bot-message { align-self: flex-end; background: #ffffff; border-bottom-right-radius: 2px; box-shadow: 0 1px 2px rgba(0,0,0,0.1); }
-        .alert-box { margin-top: 6px; padding: 8px; border-radius: 8px; font-weight: bold; }
-        .alert-danger { background: #ffebee; color: #c62828; border: 1px solid #ffcdd2; }
-        .alert-safe { background: #e8f5e9; color: #2e7d32; border: 1px solid #c8e6c9; }
-        .chat-input-area { display: flex; padding: 12px; background: #f0f0f0; gap: 8px; align-items: center; }
-        .chat-input { flex: 1; padding: 12px 16px; border: 1px solid #ccc; border-radius: 24px; outline: none; font-size: 0.95rem; }
-        .chat-input:focus { border-color: #075e54; }
-        .btn-send { background: #075e54; color: white; border: none; border-radius: 50%; width: 44px; height: 44px; cursor: pointer; display: flex; justify-content: center; align-items: center; font-size: 1.1rem; }
-        .btn-send:hover { background: #128c7e; }
-        .loading { font-size: 0.85rem; color: #666; font-style: italic; }
-        /* סגנון לסקשן התרעות חמות */
-.threat-feed {
-    margin-top: 20px;
-    background: #ffffff;
-    border-radius: 12px;
-    padding: 16px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.06);
-    border: 1px solid #e2e8f0;
-}
-.threat-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 12px;
-    border-bottom: 1px solid #edf2f7;
-    padding-bottom: 8px;
-}
-.threat-title {
-    font-size: 1.05rem;
-    font-weight: bold;
-    color: #1a202c;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-}
-.live-badge {
-    background-color: #fee2e2;
-    color: #dc2626;
-    font-size: 0.75rem;
-    padding: 2px 8px;
-    border-radius: 9999px;
-    font-weight: bold;
-    animation: pulse 2s infinite;
-}
-@keyframes pulse {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0.5; }
-}
-.threat-item {
-    background: #f8fafc;
-    border-right: 4px solid #ef4444;
-    border-radius: 6px;
-    padding: 10px 12px;
-    margin-bottom: 8px;
-    font-size: 0.85rem;
-}
-.threat-item strong {
-    color: #b91c1c;
-    display: block;
-    margin-bottom: 3px;
-}
-.whatsapp-share-btn {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    width: 100%;
-    background-color: #25D366;
-    color: white;
-    text-decoration: none;
-    font-weight: bold;
-    font-size: 0.9rem;
-    padding: 10px;
-    border-radius: 8px;
-    margin-top: 12px;
-    transition: background-color 0.2s;
-}
-.whatsapp-share-btn:hover {
-    background-color: #1ebe5d;
-}
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Assistant', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+
+        body {
+            background-color: #f1f5f9;
+            color: #1e293b;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 24px 16px;
+        }
+
+        /* עמודת מרכז הדף */
+        .app-wrapper {
+            width: 100%;
+            max-width: 600px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        /* כותרת עליונה מיתוגית */
+        .brand-header {
+            text-align: center;
+            padding: 10px 0;
+        }
+
+        .brand-logo {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 52px;
+            height: 52px;
+            background: linear-gradient(135deg, #0ea5e9, #0284c7);
+            color: #ffffff;
+            border-radius: 14px;
+            font-size: 26px;
+            margin-bottom: 12px;
+            box-shadow: 0 4px 12px rgba(2, 132, 199, 0.25);
+        }
+
+        .brand-title {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: #0f172a;
+            margin-bottom: 4px;
+            letter-spacing: -0.5px;
+        }
+
+        .brand-subtitle {
+            font-size: 0.95rem;
+            color: #64748b;
+        }
+
+        /* כרטיסיית הצ'אט הראשית */
+        .chat-container {
+            background: #ffffff;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            display: flex;
+            flex-direction: column;
+            height: 500px;
+            overflow: hidden;
+            border: 1px solid #e2e8f0;
+        }
+
+        .chat-header {
+            background: #0f172a;
+            color: white;
+            padding: 14px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .chat-header-info {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .status-dot {
+            width: 9px;
+            height: 9px;
+            background-color: #22c55e;
+            border-radius: 50%;
+            box-shadow: 0 0 8px #22c55e;
+        }
+
+        .chat-header h2 {
+            font-size: 1rem;
+            font-weight: 700;
+        }
+
+        .chat-messages {
+            flex: 1;
+            padding: 20px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            background-color: #f8fafc;
+        }
+
+        .message {
+            max-width: 85%;
+            padding: 12px 16px;
+            border-radius: 16px;
+            font-size: 0.95rem;
+            line-height: 1.5;
+            word-break: break-word;
+            white-space: pre-wrap;
+        }
+
+        .user-message {
+            align-self: flex-start;
+            background: #0284c7;
+            color: white;
+            border-bottom-left-radius: 4px;
+        }
+
+        .bot-message {
+            align-self: flex-end;
+            background: #ffffff;
+            color: #334155;
+            border-bottom-right-radius: 4px;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+            border: 1px solid #e2e8f0;
+        }
+
+        .alert-box {
+            margin-top: 8px;
+            padding: 10px 14px;
+            border-radius: 10px;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .alert-danger {
+            background: #fef2f2;
+            color: #991b1b;
+            border: 1px solid #fecaca;
+        }
+
+        .alert-safe {
+            background: #f0fdf4;
+            color: #166534;
+            border: 1px solid #bbf7d0;
+        }
+
+        .chat-input-area {
+            display: flex;
+            padding: 12px 16px;
+            background: #ffffff;
+            gap: 10px;
+            align-items: center;
+            border-top: 1px solid #e2e8f0;
+        }
+
+        .chat-input {
+            flex: 1;
+            padding: 12px 18px;
+            border: 1.5px solid #cbd5e1;
+            border-radius: 9999px;
+            outline: none;
+            font-size: 0.95rem;
+            transition: border-color 0.2s;
+        }
+
+        .chat-input:focus {
+            border-color: #0284c7;
+        }
+
+        .btn-send {
+            background: #0284c7;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 44px;
+            height: 44px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            transition: background-color 0.2s;
+        }
+
+        .btn-send:hover {
+            background: #0369a1;
+        }
+
+        .loading {
+            font-size: 0.85rem;
+            color: #94a3b8;
+            font-style: italic;
+        }
+
+        /* סקשן התרעות עדכניות */
+        .threat-feed {
+            background: #ffffff;
+            border-radius: 18px;
+            padding: 20px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
+            border: 1px solid #e2e8f0;
+        }
+
+        .threat-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 14px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #f1f5f9;
+        }
+
+        .threat-title {
+            font-size: 1rem;
+            font-weight: 700;
+            color: #0f172a;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .live-badge {
+            background-color: #fee2e2;
+            color: #b91c1c;
+            font-size: 0.75rem;
+            padding: 4px 10px;
+            border-radius: 9999px;
+            font-weight: 700;
+        }
+
+        .threat-list {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .threat-item {
+            background: #f8fafc;
+            border-right: 4px solid #ef4444;
+            border-radius: 8px;
+            padding: 12px 14px;
+            font-size: 0.85rem;
+            line-height: 1.4;
+        }
+
+        .threat-item strong {
+            color: #0f172a;
+            display: block;
+            margin-bottom: 4px;
+            font-size: 0.9rem;
+        }
+
+        .threat-item p {
+            color: #64748b;
+            margin: 0;
+        }
+
+        /* כפתור שיתוף בוואטסאפ */
+        .whatsapp-share-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            background-color: #22c55e;
+            color: white;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 0.95rem;
+            padding: 12px;
+            border-radius: 12px;
+            margin-top: 14px;
+            transition: background-color 0.2s;
+        }
+
+        .whatsapp-share-btn:hover {
+            background-color: #16a34a;
+        }
+
+        /* הערת הבהרה משפטית */
+        .disclaimer {
+            text-align: center;
+            font-size: 0.75rem;
+            color: #94a3b8;
+            padding: 8px 0;
+            line-height: 1.4;
+        }
     </style>
 </head>
 <body>
 
-<div class="chat-container">
-    <div class="chat-header">
-        <h1>מגן רשת - עוזר אבטחה</h1>
-        <p>הדביקי הודעה חשודה, קישור או הודעת SMS לבדיקה מיידית</p>
-    </div>
+<div class="app-wrapper">
+    <!-- כותרת ראשית -->
+    <header class="brand-header">
+        <div class="brand-logo">🛡️</div>
+        <h1 class="brand-title">מגן רשת</h1>
+        <p class="brand-subtitle">בדיקה חכמה ומהירה להודעות SMS, מיילים וקישורים חשודים</p>
+    </header>
 
-    <div class="chat-messages" id="chatMessages">
-        <div class="message bot-message">שלום! 👋<br>אני כאן כדי לעזור לך לבדוק הודעות וקישורים חשודים.<br>הדביקי כאן הודעה שקיבלת כדי שאוכל לבדוק אותה מול מנועי האבטחה ומילות הונאה מוכרות.</div>
-    </div>
+    <!-- חלונית הצ'אט -->
+    <main class="chat-container">
+        <div class="chat-header">
+            <div class="chat-header-info">
+                <span class="status-dot"></span>
+                <h2>עוזר אבטחה פעיל</h2>
+            </div>
+            <span style="font-size: 0.8rem; color: #94a3b8;">גרסה 1.0</span>
+        </div>
 
-    <div class="chat-input-area">
-        <input type="text" id="userInput" class="chat-input" placeholder="הדביקי כאן את ההודעה או הקישור..." onkeypress="handleKeyPress(event)">
-        <button class="btn-send" onclick="sendMessage()">➤</button>
-    </div>
-</div>
-    <!-- סקשן התרעות קהילתיות בזמן אמת -->
-<div class="threat-feed">
-    <div class="threat-header">
-        <span class="threat-title">🚨 התרעות עוקץ חמות ברשת</span>
-        <span class="live-badge">● עדכני להיום</span>
-    </div>
-    
-    <div class="threat-item">
-        <strong>התחזות לדואר ישראל / חבילות בדואר</strong>
-        הודעות SMS על "חבילה מעוכבת הדורשת תשלום מכס של 11.50 ש״ח". הקישורים מובילים לגניבת פרטי אשראי.
-    </div>
+        <div class="chat-messages" id="chatMessages">
+            <div class="message bot-message">
+                שלום! 👋<br>
+                קיבלת הודעה חשודה בוואטסאפ או ב-SMS? קישור לא ברור?<br>
+                הדביקי את הטקסט או הקישור כאן למטה ואבדוק עבורך אם מדובר בעוקץ.
+            </div>
+        </div>
 
-    <div class="threat-item" style="border-right-color: #f59e0b;">
-        <strong>הודעות "חשבון הבנק שלך הוקפא"</strong>
-        סמסים מבהילים עם קישורים מזויפים שמתחזים לאתרי כניסה של בנק הפועלים ולאומי.
-    </div>
+        <div class="chat-input-area">
+            <input type="text" id="userInput" class="chat-input" placeholder="הדביקי כאן הודעה, טקסט או קישור לבדיקה..." onkeypress="handleKeyPress(event)">
+            <button class="btn-send" onclick="sendMessage()" aria-label="שלח">➤</button>
+        </div>
+    </main>
 
-    <div class="threat-item" style="border-right-color: #3b82f6;">
-        <strong>הצעות עבודה מפתות בטלגרם / וואטסאפ</strong>
-        "הרווח 500 ש״ח ביום בלחיצה על לייקים ביוטיוב" – מטרתו משיכת כספים בתרמית פירמידה.
-    </div>
+    <!-- התרעות רשת חמות -->
+    <section class="threat-feed">
+        <div class="threat-header">
+            <span class="threat-title">🚨 התרעות עוקץ פעילות</span>
+            <span class="live-badge">● מעודכן</span>
+        </div>
 
-    <!-- כפתור שיתוף ישיר לוואטסאפ -->
-    <a class="whatsapp-share-btn" 
-       href="https://api.whatsapp.com/send?text=היי,%20מסתובבות%20המון%20הודעות%20עוקץ%20וסמסים%20מזויפים%20לאחרונה.%20לפני%20שאתם%20לוחצים%20על%20קישור%20חשוד,%20אפשר%20לבדוק%20אותו%20בחינם%20באתר%20'מגן%20רשת':%20https://magen-reshet.onrender.com/" 
-       target="_blank">
-        📲 שתפו בוואטסאפ להזהרת חברים ומשפחה
-    </a>
+        <div class="threat-list">
+            <div class="threat-item">
+                <strong>התחזות לדואר ישראל / חבילות</strong>
+                <p>הודעות SMS על "חבילה שממתינה לשחרור מכס בסך 11.50 ש״ח". הקישורים גונבים פרטי כרטיס אשראי.</p>
+            </div>
+
+            <div class="threat-item" style="border-right-color: #f59e0b;">
+                <strong>התחזות לבנקים: "חשבונך נחסם"</strong>
+                <p>סמסים המלחיצים להיכנס לקישור כדי לחדש גישה לחשבון הבנק, במטרה לגנוב סיסמאות כניסה.</p>
+            </div>
+
+            <div class="threat-item" style="border-right-color: #3b82f6;">
+                <strong>הצעות עבודה קלות בטלגרם</strong>
+                <p>"תשלום של מאות שקלים ליום תמורת לייקים" – תרמית פירמידה שנועדה להוציא ממך כספים.</p>
+            </div>
+        </div>
+
+        <a class="whatsapp-share-btn" 
+           href="https://api.whatsapp.com/send?text=היי,%20מסתובבות%20המון%20הודעות%20עוקץ%20וסמסים%20מזויפים%20לאחרונה.%20לפני%20שאתם%20לוחצים%20על%20קישור%20חשוד,%20אפשר%20לבדוק%20אותו%20בחינם%20באתר%20'מגן%20רשת':%20https://magen-reshet.onrender.com/" 
+           target="_blank">
+            📲 שתפו בוואטסאפ להזהרת המשפחה והחברים
+        </a>
+    </section>
+
+    <!-- שורת הבהרה -->
+    <footer class="disclaimer">
+        ⚠️ הבהרה: המערכת מספקת הערכת סיכונים טכנולוגית ראשונית בלבד ואינה מהווה ייעוץ אבטחה מוחלט. השימוש באחריות המשתמש.
+    </footer>
 </div>
 
 <script>
@@ -166,56 +399,54 @@
         const loadingDiv = document.createElement('div');
         loadingDiv.className = 'message bot-message loading';
         loadingDiv.id = loadingId;
-        loadingDiv.innerText = 'בודק את ההודעה והקישורים מול מאגרי האבטחה...';
+        loadingDiv.innerText = 'בודק את ההודעה מול מאגרי אבטחה...';
         chatMessages.appendChild(loadingDiv);
         chatMessages.scrollTop = chatMessages.scrollHeight;
 
         try {
-            const response = await fetch('/check', {
+            const response = await fetch('/analyze', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ message: text })
             });
             const data = await response.json();
             
-            const loadingElem = document.getElementById(loadingId);
-            if (loadingElem) loadingElem.remove();
+            const loader = document.getElementById(loadingId);
+            if (loader) loader.remove();
 
-            const analysisResult = data.analysis || data.error || 'לא התקבלה תשובה';
-            const isSuspicious = analysisResult.includes('⚠️') || analysisResult.includes('מילות לחץ') || analysisResult.includes('זיהו את האתר');
-
-            let replyHtml = `<strong>תוצאת הבדיקה:</strong><br>`;
-            if (isSuspicious) {
-                replyHtml += `<div class="alert-box alert-danger">⚠️ שימי לב! זוהו סימנים חשודים להונאה.</div>`;
-            } else {
-                replyHtml += `<div class="alert-box alert-safe">✅ לא נמצאו איומים חריגים.</div>`;
+            let responseHtml = data.reply || 'לא התקבלה תשובה תקינה מהשרת.';
+            if (data.alert) {
+                const alertClass = data.alert_type === 'danger' ? 'alert-danger' : 'alert-safe';
+                responseHtml += `<div class="alert-box ${alertClass}">${data.alert}</div>`;
             }
 
-            replyHtml += `<div style="margin-top: 8px;">${analysisResult}</div>`;
-            addMessage(replyHtml, 'bot-message');
-        } catch (err) {
-            const loadingElem = document.getElementById(loadingId);
-            if (loadingElem) loadingElem.remove();
-            addMessage('אירעה שגיאה בתקשורת מול השרת, אנא נסי שוב.', 'bot-message');
+            addMessage(responseHtml, 'bot-message', true);
+        } catch (error) {
+            const loader = document.getElementById(loadingId);
+            if (loader) loader.remove();
+            addMessage('אירעה שגיאה בבדיקה, אנא נסי שוב מאוחר יותר.', 'bot-message');
         }
     }
 
-    function addMessage(html, className) {
+    function addMessage(content, className, isHtml = false) {
         const chatMessages = document.getElementById('chatMessages');
         const msgDiv = document.createElement('div');
         msgDiv.className = `message ${className}`;
-        msgDiv.innerHTML = html;
+        if (isHtml) {
+            msgDiv.innerHTML = content;
+        } else {
+            msgDiv.innerText = content;
+        }
         chatMessages.appendChild(msgDiv);
         chatMessages.scrollTop = chatMessages.scrollHeight;
     }
 
-    function handleKeyPress(e) {
-        if (e.key === 'Enter') sendMessage();
+    function handleKeyPress(event) {
+        if (event.key === 'Enter') {
+            sendMessage();
+        }
     }
 </script>
-<p style="text-align: center; font-size: 12px; color: #777; margin-top: 20px; direction: rtl;">
-  ⚠️ <strong>הבהרה:</strong> המערכת מספקת הערכת סיכונים טכנולוגית ראשונית בלבד ואינה מהווה ערובה מוחלטת. השימוש בקישורים הינו באחריות המשתמש.
-</p>
 
 </body>
 </html>
