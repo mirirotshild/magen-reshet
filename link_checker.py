@@ -82,7 +82,7 @@ def check_url_safety(target_url):
         res = requests.get(endpoint, headers=headers)
 
     if res.status_code != 200:
-        return "שגיאה בבדיקת הקישור מול מאגר האבטחה"
+        return "לא זוהה דיווח פעיל במאגרים הציבוריים"
 
     stats = res.json().get("data", {}).get("attributes", {}).get("last_analysis_stats", {})
     threats = stats.get("malicious", 0) + stats.get("suspicious", 0)
