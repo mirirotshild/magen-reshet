@@ -112,6 +112,7 @@ def analyze_text(text):
 
     return "\n".join(report)
 
+@app.route("/analyze", methods=["POST"])
 @app.route("/check", methods=["POST"])
 def check():
     data = request.get_json(silent=True) or {}
@@ -121,7 +122,17 @@ def check():
         return jsonify({"error": "לא התקבל טקסט לבדיקה"}), 400
 
     result = analyze_text(incoming_text)
-    return jsonify({"analysis": result})
+    
+    is_danger = "זדוני" in result or "חשוד" in result or "מתחזה" in result or "עוקץ" in result
+    alert_type = "danger" if is_danger else "safe"
+    alert_msg = "המערכת מזהה חשד ממשי להונאה!" if is_danger else "לא זוהו ממצאים חריגים."
+
+    return jsonify({
+        "reply": result,
+        "analysis": result,
+        "alert": alert_msg,
+        "alert_type": alert_type
+    })
 
 if __name__ == "__main__":
     print("...שרת הסריקה פועל וממתין להודעות")
